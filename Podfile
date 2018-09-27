@@ -8,4 +8,5 @@ end
 
 target 'KataScreenshotTests' do
     pod 'FBSnapshotTestCase'
+    pod 'KIF'
 end
