@@ -27,6 +27,14 @@ class SuperHeroDetailViewController: KataSuperHeroesViewController, SuperHeroDet
             return
         }
         userLabel.text = superHero.name
+        
+        
+        if superHero.isAvenger {
+            
+            userLabel.text = "\(userLabel.text!) - (Avenger)"
+            
+        }
+        
         userLabel.accessibilityLabel = "Name: \(superHero.name)"
         userLabel.isHidden = false
         errorLabel.isHidden = true
