@@ -64,7 +64,63 @@ class SuperHeroesViewControllerTests: ScreenshotTest {
         
     }
     
+    func test_empty_name(){
+        
+        //Given
+        _ = givenThereIsASuperHeroWithEmptyName()
+        
+        //When
+        let viewController = getSuperHeroViewController()
+        
+        //Then
+        verify(viewController: viewController)
+        
+        
+    }
     
+    func test_long_name_of_superhero(){
+        //Given
+        _ = givenThereIsASuperHeroWithLongName()
+        
+        //When
+        let viewController = getSuperHeroViewController()
+        
+        //Then
+        verify(viewController: viewController)
+        
+        
+    }
+    
+    
+    func test_loading(){
+        //When
+        let viewController = getSuperHeroViewController()
+        
+        //Then
+        verify(viewController: viewController)
+        
+        
+        
+        
+    }
+    
+    fileprivate func givenThereIsASuperHeroWithEmptyName() -> SuperHero {
+        return givenThereIsASuperHeroWithName("")
+    }
+    
+    fileprivate func givenThereIsASuperHeroWithLongName() -> SuperHero {
+        return givenThereIsASuperHeroWithName("Superhero with very long long long long long long long long name ")
+        
+    }
+    
+    
+    fileprivate func givenThereIsASuperHeroWithName(_ name : String) -> SuperHero{
+        let superHero = SuperHero(name: name,
+                                  photo: URL(string: ""),
+                                  isAvenger: false, description: "Description")
+        repository.superHeroes = [superHero]
+        return superHero
+    }
     
     
 

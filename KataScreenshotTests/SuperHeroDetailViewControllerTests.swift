@@ -1,52 +1,123 @@
 //
 //  SuperHeroDetailViewControllerTests.swift
-//  KataSuperHeroes
+//  KataScreenshotTests
 //
-//  Created by Sergio Gutiérrez on 22/12/16.
-//  Copyright © 2016 GoKarumi. All rights reserved.
+//  Created by Jesus Martin Alonso on 27/9/18.
+//  Copyright © 2018 Karumi. All rights reserved.
 //
 
-import UIKit
+import XCTest
 @testable import KataScreenshot
 
 class SuperHeroDetailViewControllerTests: ScreenshotTest {
-
+    
+    
     fileprivate let repository = MockSuperHeroesRepository()
-
-    func testShowsSuperHeroWithNoBadge() {
-        let superHero = givenASuperHero(isAvenger: false)
+    
+    override func setUp() {
+        super.setUp()
+        // Put setup code here. This method is called before the invocation of each test method in the class.
+    }
+    
+    override func tearDown() {
+        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        super.tearDown()
+    }
+    
+    
+    func test_regular_super_hero() {
         
-        let viewController = getSuperHeroDetailViewController(superHero.name)
-
+        _ = givenThereIsASuperHeroWithName("SuperHero", isAvenger: false)
+        
+        let viewController = getSuperHeroViewControllerWithName("SuperHero")
+        
         verify(viewController: viewController)
     }
-
-    func testShowsSuperHeroWithBadge() {
-        let superHero = givenASuperHero(isAvenger: true)
-
-        let viewController = getSuperHeroDetailViewController(superHero.name)
-
+    
+    
+    func test_avenger_super_hero(){
+        
+        _ = givenThereIsASuperHeroWithName("SuperHero", isAvenger: true)
+        
+        let viewController = getSuperHeroViewControllerWithName("SuperHero")
+        
         verify(viewController: viewController)
     }
-
-    func givenASuperHero(isAvenger: Bool) -> SuperHero {
-        let superHero = SuperHeroMother.givenASuperHero(isAvenger: isAvenger)
+    
+    
+    func test_regular_super_hero_with_long_name(){
+        _ = givenThereIsASuperHeroWithLongName()
+        
+        let veryLongName = "Superhero with very long long long long long long long long name "
+        
+        let viewController = getSuperHeroViewControllerWithName(veryLongName)
+        
+        verify(viewController: viewController)
+        
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    fileprivate func givenThereIsASuperHeroWithEmptyName() -> SuperHero {
+        return givenThereIsASuperHeroWithName("", isAvenger: false)
+    }
+    
+    fileprivate func givenThereIsASuperHeroWithLongName() -> SuperHero {
+        return givenThereIsASuperHeroWithName("Superhero with very long long long long long long long long name ", isAvenger: false)
+        
+    }
+    
+    
+    fileprivate func givenThereIsASuperHeroWithName(_ name : String, isAvenger : Bool) -> SuperHero{
+        let superHero = SuperHero(name: name,
+                                  photo: URL(string: ""),
+                                  isAvenger: isAvenger, description: "Description")
         repository.superHeroes = [superHero]
         return superHero
     }
+    
+    
+    
+    fileprivate func givenThereAreSomeAvengers() -> [SuperHero] {
+        return givenThereAreSomeSuperHeroes(avengers: true)
+    }
+    
+    fileprivate func givenThereAreNoSuperHeroes() {
+        _ = givenThereAreSomeSuperHeroes(0)
+    }
+    
+    fileprivate func givenThereAreSomeSuperHeroes(_ numberOfSuperHeroes: Int = 10,
+                                                  avengers: Bool = false) -> [SuperHero] {
+        var superHeroes = [SuperHero]()
+        for i in 0..<numberOfSuperHeroes {
+            let superHero = SuperHero(name: "SuperHero - \(i)",
+                photo: URL(string: ""),
+                isAvenger: avengers, description: "Description - \(i)")
+            superHeroes.append(superHero)
+        }
+        repository.superHeroes = superHeroes
+        return superHeroes
+    }
 
-    fileprivate func getSuperHeroDetailViewController(_ superHeroName: String) -> UIViewController {
-        let superHeroDetailViewController = ServiceLocator()
-            .provideSuperHeroDetailViewController(superHeroName) as! SuperHeroDetailViewController
-        superHeroDetailViewController.presenter = SuperHeroDetailPresenter(
-            ui: superHeroDetailViewController,
-            superHeroName: superHeroName,
-            getSuperHeroByName: GetSuperHeroByName(repository: repository)
-        )
-
+    
+    
+    fileprivate func getSuperHeroViewControllerWithName(_ name : String) -> UIViewController {
+        let superHeroeDetailViewController = ServiceLocator().provideSuperHeroDetailViewController(name) as! SuperHeroDetailViewController
+        
+        superHeroeDetailViewController.presenter = SuperHeroDetailPresenter(ui: superHeroeDetailViewController, superHeroName: name, getSuperHeroByName: GetSuperHeroByName(repository: repository))
+        
         let rootViewController = UINavigationController()
-        rootViewController.viewControllers = [superHeroDetailViewController]
-
+        rootViewController.viewControllers = [superHeroeDetailViewController]
         return rootViewController
     }
+    
+    
+ 
+    
 }

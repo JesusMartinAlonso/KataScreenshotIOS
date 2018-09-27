@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		12111B3BB7CAF1545EACB18F /* Pods_KataScreenshot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C52E23864CDE6FC17800AB6 /* Pods_KataScreenshot.framework */; };
+		2D62615E215D2C13005D6112 /* SuperHeroDetailViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D62615D215D2C13005D6112 /* SuperHeroDetailViewControllerTests.swift */; };
 		4915B3981E0C25870056AE6A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4915B3971E0C25870056AE6A /* Assets.xcassets */; };
 		4915B39B1E0C25870056AE6A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4915B3991E0C25870056AE6A /* LaunchScreen.storyboard */; };
 		4915B3C01E0C26BA0056AE6A /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4915B3BF1E0C26BA0056AE6A /* UIColor.swift */; };
@@ -45,6 +46,7 @@
 
 /* Begin PBXFileReference section */
 		1D782A2F87D5380C012EA891 /* Pods-KataScreenshotTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KataScreenshotTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-KataScreenshotTests/Pods-KataScreenshotTests.release.xcconfig"; sourceTree = "<group>"; };
+		2D62615D215D2C13005D6112 /* SuperHeroDetailViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperHeroDetailViewControllerTests.swift; sourceTree = "<group>"; };
 		4226A96F0DDBC63CB44010CB /* Pods-KataScreenshot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KataScreenshot.release.xcconfig"; path = "Pods/Target Support Files/Pods-KataScreenshot/Pods-KataScreenshot.release.xcconfig"; sourceTree = "<group>"; };
 		4915B38D1E0C25870056AE6A /* KataScreenshot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KataScreenshot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4915B3971E0C25870056AE6A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 		4915B3E21E0C29020056AE6A /* Super Heroes */ = {
 			isa = PBXGroup;
 			children = (
+				2D62615D215D2C13005D6112 /* SuperHeroDetailViewControllerTests.swift */,
 				49CDFEDA1E2402720019961D /* View */,
 				4915B3E41E0C29190056AE6A /* SuperHeroesViewControllerTests.swift */,
 			);
@@ -482,6 +485,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				49CDFEDF1E2403CB0019961D /* SuperHeroMother.swift in Sources */,
+				2D62615E215D2C13005D6112 /* SuperHeroDetailViewControllerTests.swift in Sources */,
 				4915B3E61E0C29190056AE6A /* SuperHeroesViewControllerTests.swift in Sources */,
 				49CDFEDD1E2402840019961D /* SuperHeroTableViewCellTests.swift in Sources */,
 				4915B3F21E0C2D130056AE6A /* ScreenshotTest.swift in Sources */,
