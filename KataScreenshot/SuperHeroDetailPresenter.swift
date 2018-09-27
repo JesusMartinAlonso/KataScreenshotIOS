@@ -24,10 +24,26 @@ class SuperHeroDetailPresenter: BothamPresenter {
     func viewDidLoad() {
         ui?.title = superHeroName
         ui?.showLoader()
-        getSuperHeroByName.execute(superHeroName) { superHero in
+        getSuperHeroByName.execute(superHeroName, success: { (superHero) in
             self.ui?.hideLoader()
             self.ui?.show(superHero: superHero)
+        }) { (error) in
+            
+            self.ui?.hideLoader()
+            switch error {
+            case .NoInternetConnection :
+                
+                self.ui?.showError("No hay conexión a Internet")
+                
+            case .SuperHeroNotFound :
+                
+                 self.ui?.showError("No se encuentra el superheroe")
+            }
+            
+            
         }
+        
+        
     }
 
 }
@@ -36,5 +52,6 @@ protocol SuperHeroDetailUI: BothamUI, BothamLoadingUI {
 
     var title: String? {get set}
     func show(superHero: SuperHero?)
+    func showError(_ error : String)
 
 }

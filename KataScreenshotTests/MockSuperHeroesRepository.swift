@@ -13,13 +13,24 @@ class MockSuperHeroesRepository: SuperHeroesRepository {
 
     var superHeroes = [SuperHero]()
 
+    var error : SuperHeroesRepositoryError? = nil
+    
+    
     override func getAll(_ completion: @escaping ([SuperHero]) -> ()) {
         completion(superHeroes)
     }
 
-    override func getSuperHero(withName name: String, completion: @escaping (SuperHero?) -> ()) {
-        let superHeroByName = superHeroes.filter { $0.name == name }.first
-        completion(superHeroByName)
+ 
+    override func getSuperHero(withName name: String, success: @escaping (SuperHero) -> (), failure: @escaping (SuperHeroesRepositoryError) -> ()) {
+        
+        if let errorUnwrapped = error {
+            failure(errorUnwrapped)
+        }else{
+            let superHeroByName = superHeroes.filter { $0.name == name }.first
+            success(superHeroByName!)
+        }
+        
+        
     }
 
 }

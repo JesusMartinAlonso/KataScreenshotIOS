@@ -8,8 +8,17 @@
 
 import Foundation
 
+enum SuperHeroesRepositoryError : Error {
+    case SuperHeroNotFound
+    case NoInternetConnection
+}
+
+
 class SuperHeroesRepository {
 
+    
+    
+    
     fileprivate let superHeroes: [SuperHero]
 
     init() {
@@ -109,10 +118,13 @@ class SuperHeroesRepository {
         }
     }
 
-    func getSuperHero(withName name: String, completion: @escaping (SuperHero?) -> ()) {
+    func getSuperHero(withName name: String, success: @escaping (SuperHero) -> (), failure: @escaping (SuperHeroesRepositoryError) -> () ) {
         delay(1.5) {
-            let superHeroByName = self.superHeroes.filter { $0.name == name }.first
-            completion(superHeroByName)
+            if let superHeroByName = (self.superHeroes.filter { $0.name == name }.first) {
+                success(superHeroByName)
+            }else{
+                failure(.SuperHeroNotFound)
+            }
         }
     }
 

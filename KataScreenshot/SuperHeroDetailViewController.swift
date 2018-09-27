@@ -12,7 +12,10 @@ import BothamUI
 import SDWebImage
 
 class SuperHeroDetailViewController: KataSuperHeroesViewController, SuperHeroDetailUI {
-
+   
+    
+    @IBOutlet weak var errorLabel: UILabel!
+    
     @IBOutlet weak var avengersBadgeImageView: UIImageView!
 
     @IBOutlet weak var photoImageView: UIImageView!
@@ -26,10 +29,19 @@ class SuperHeroDetailViewController: KataSuperHeroesViewController, SuperHeroDet
         userLabel.text = superHero.name
         userLabel.accessibilityLabel = "Name: \(superHero.name)"
         userLabel.isHidden = false
+        errorLabel.isHidden = true
         descriptionLabel.text = superHero.description
         descriptionLabel.accessibilityLabel = "Description: \(superHero.name)"
         descriptionLabel.isHidden = false
         photoImageView.sd_setImage(with: superHero.photo as URL!)
         avengersBadgeImageView.isHidden = !superHero.isAvenger
+    }
+    
+    
+    
+    func showError(_ error: String) {
+        errorLabel.isHidden = false
+        errorLabel.text = error
+        
     }
 }

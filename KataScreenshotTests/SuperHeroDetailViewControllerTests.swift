@@ -54,6 +54,29 @@ class SuperHeroDetailViewControllerTests: ScreenshotTest {
         
         verify(viewController: viewController)
         
+    }
+    
+    
+    func test_internet_connection_error(){
+        
+        _ = givenThereIsNotInternetConnection()
+        
+        let viewController = getSuperHeroViewControllerWithName("SuperHero")
+        
+        verify(viewController: viewController)
+        
+        
+    }
+    
+    
+    func test_superhero_does_not_exist(){
+        
+        _ = givenSuperHeroDoesNotExists()
+        
+        let viewController = getSuperHeroViewControllerWithName("SuperHero")
+        
+        verify(viewController: viewController)
+        
         
     }
     
@@ -62,7 +85,13 @@ class SuperHeroDetailViewControllerTests: ScreenshotTest {
     
     
     
+    fileprivate func givenThereIsNotInternetConnection(){
+        repository.error = .NoInternetConnection
+    }
     
+    fileprivate func givenSuperHeroDoesNotExists(){
+        repository.error = .SuperHeroNotFound
+    }
     
     fileprivate func givenThereIsASuperHeroWithEmptyName() -> SuperHero {
         return givenThereIsASuperHeroWithName("", isAvenger: false)
