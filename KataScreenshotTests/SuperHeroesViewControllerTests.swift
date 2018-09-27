@@ -34,6 +34,37 @@ class SuperHeroesViewControllerTests: ScreenshotTest {
     }
     
     
+    func test_shows_an_avenger() {
+        
+        //Given
+        
+        _ = givenThereAreSomeSuperHeroes(1, avengers: true)
+        
+        //When
+        let viewController = getSuperHeroViewController()
+        
+        //Then
+        verify(viewController: viewController)
+        
+        
+    }
+    
+    func test_shows_a_regular_super_hero(){
+        
+        //Given
+        
+        _ = givenThereAreSomeSuperHeroes(1, avengers: false)
+        
+        //When
+        let viewController = getSuperHeroViewController()
+        
+        //Then
+        verify(viewController: viewController)
+        
+        
+    }
+    
+    
     
     
 
